@@ -24,7 +24,7 @@ services:
       bash -c "python manage.py migrate
       && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/code
+      - .:/core
     ports:
       - "8000:8000"
     environment:
@@ -35,7 +35,20 @@ services:
       - POSTGRES_PORT=5432
     depends_on:
       - postgres
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+  redis:
+    image: redis:alpine
 
 
 volumes:
   local_pgdata:
+  cache:
+    driver: local

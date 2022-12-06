@@ -1,5 +1,3 @@
-from abc import ABC
-
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
@@ -51,7 +49,7 @@ class UserDeviceSerializer(serializers.ModelSerializer):
 class ConsumptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumption
-        fields = ('id', 'timestamp', 'consumption')
+        fields = ('id', 'user_device_id', 'timestamp', 'consumption')
 
 
 class LoginSerializer(serializers.Serializer):

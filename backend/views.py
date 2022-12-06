@@ -62,6 +62,10 @@ class ConsumptionViewSet(viewsets.ModelViewSet):
     queryset = Consumption.objects.all().order_by('timestamp')
     serializer_class = ConsumptionSerializer
 
+    def create(self, *args, **kwargs):
+        print(self.request.data)
+        return super().create(*args, **kwargs)
+
     def get_queryset(self):
         queryset = Consumption.objects.all().order_by('timestamp')
         userId = self.request.query_params.get("userId")
@@ -88,3 +92,15 @@ class LoginAPIView(APIView):
         userDTO = UserSerializer(user)
 
         return Response(userDTO.data, status=status.HTTP_200_OK)
+
+
+# chat/views.py
+from django.shortcuts import render
+
+
+def index(request):
+    return render(request, "chat/index.html")
+
+
+def room(request, room_name):
+    return render(request, "chat/room.html", {"room_name": room_name})

@@ -123,8 +123,12 @@ fabric.properties
 # C extensions
 *.so
 
+# Postgres
+data/
+
 # Distribution / packaging
 .Python
+*.env
 env/
 build/
 develop-eggs/

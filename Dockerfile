@@ -1,4 +1,10 @@
-FROM python:3.9.13   
+FROM ubuntu:14.04 as builder
+
+RUN apt-get update
+
+RUN apt-get -y install redis-server
+
+FROM python:3.9.13
 ENV DockerHOME=/home/app/webapp  
 
 RUN mkdir -p $DockerHOME  
